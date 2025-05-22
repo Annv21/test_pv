@@ -6,6 +6,8 @@ import SocialNetwork from './components/SocialNetwork';
 import ReleasePages from './components/ReleasePages';
 import DemoImport from './components/DemoImport';
 import ArtistPages from './components/ArtistPages';
+import EasyToUse from './components/EasyToUse';
+import SellYourMerch from './components/SellYourMerch';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
       <ReleasePages />
       <DemoImport />
       <ArtistPages />
+      <EasyToUse />
+      <SellYourMerch />
     </>
 
   );

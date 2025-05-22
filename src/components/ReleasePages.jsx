@@ -25,26 +25,26 @@ function ReleasePages() {
     const [view, setView] = useState('single');
   
     const singlePages = [
-      { name: "Compact", img: Compact },
+      { name: "Info at Right", img: InfoAtRight },
+      { name: "Info at Left", img: InfoAtLeft },
+      { name: "Wide Width", img: WideWidth },
       { name: "Custom Header", img: CustomHeader },
       { name: "Custom Layout", img: CustomLayout },
-      { name: "Info at Left", img: InfoAtLeft },
-      { name: "Info at Right", img: InfoAtRight },
-      { name: "Minimal", img: Minimal },
       { name: "Text Oriented", img: TextOriented },
-      { name: "Wide Width", img: WideWidth },
+      { name: "Compact", img: Compact },
+      { name: "Minimal", img: Minimal },
       { name: "", img: AndMore },
     ];
   
     const listingPages = [
-      { name: "Animated Cover", img: AnimatedCover },
-      { name: "Broken Grid", img: BrokenGrid },
-      { name: "Carousel", img: Carousel },
-      { name: "Filtered", img: Filtered },
+      { name: "Standard", img: Standard },
       { name: "Gallery", img: Gallery },
       { name: "Label", img: Label },
+      { name: "Broken Grid", img: BrokenGrid },
+      { name: "Animated Cover", img: AnimatedCover },
       { name: "Metro", img: Metro },
-      { name: "Standard", img: Standard },
+      { name: "Filtered", img: Filtered },
+      { name: "Carousel", img: Carousel },
       { name: "And More", img: AndMore },
     ];
   

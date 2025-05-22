@@ -1,5 +1,5 @@
 import React from 'react';
-   import anh1 from '../assets/anh/anh1.jpg'; // Đường dẫn tương đối từ src/components/
+import anh1 from '../assets/anh/anh1.jpg'; // Đường dẫn tương đối từ src/components/
 
    function Sidebar() {
      return (
