@@ -1,13 +1,13 @@
 import React from 'react';
-   import MainHome from '../../public/assets/anh/HomePage/MainHome.jpg'; // Đường dẫn tương đối từ src/components/
+   import anh1 from '../assets/anh/anh1.jpg'; // Đường dẫn tương đối từ src/components/
 
    function Sidebar() {
      return (
        <div className="relative h-screen flex items-center">
          <img
            className="absolute inset-0 w-full h-full object-cover"
-           src={MainHome}
-           alt="MainHome"
+           src={anh1}
+           alt="anh1"
          />
          <div className=" inset-0 bg-white bg-opacity-80"></div>
          <div className="relative z-10 container mx-auto px-6">
