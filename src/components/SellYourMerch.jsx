@@ -10,22 +10,25 @@ import image6 from '../assets/anh/SellYourMerch/stor-sidebar.jpg';
 import image7 from '../assets/anh/SellYourMerch/store-alt.jpg';
 
 function SellYourMerch() {
-  const [offset, setOffset] = useState(0); // Sử dụng offset để quay mãi
+  const [currentSlide, setCurrentSlide] = useState(0); // Theo dõi slide hiện tại
   const images = [image1, image2, image3, image4, image5, image6, image7]; // Array of images
-  const imagesPerSlide = 3; // Each slide shows 3 images
-  const totalSlides = Math.ceil(images.length / imagesPerSlide); // Total slides: 7 images / 3 = 3 slides
+  const totalSlides = 3; // Tổng số slide cố định: 3 slide (123, 345, 567)
 
-  // Tạo danh sách ảnh mở rộng để lặp lại mượt mà
-  const extendedImages = [...images, ...images, ...images]; // Lặp lại danh sách 3 lần
+  // Định nghĩa các slide cố định
+  const slides = [
+    [image1, image2, image3], // Slide 1: 123
+    [image3, image4, image5], // Slide 2: 345
+    [image5, image6, image7], // Slide 3: 567
+  ];
 
-  // Handle next slide (move continuously to the right)
+  // Handle next slide (move to the right in a circular manner)
   const handleNext = () => {
-    setOffset((prevOffset) => prevOffset - 1); // Tăng offset âm để quay sang phải
+    setCurrentSlide((prevSlide) => (prevSlide + 1) % totalSlides); // Chuyển sang slide tiếp theo, quay lại 0 khi đến cuối
   };
 
-  // Handle previous slide (move continuously to the left)
+  // Handle previous slide (move to the left in a circular manner)
   const handlePrev = () => {
-    setOffset((prevOffset) => prevOffset + 1); // Giảm offset dương để quay sang trái
+    setCurrentSlide((prevSlide) => (prevSlide - 1 + totalSlides) % totalSlides); // Chuyển sang slide trước, quay lại cuối khi ở đầu
   };
 
   return (
@@ -40,7 +43,7 @@ function SellYourMerch() {
         {/* Carousel */}
         <div className="relative overflow-hidden max-w-6xl mx-auto">
           <div className="flex items-center">
-            {/* Nút trái (di chuyển slide sang trái mãi) */}
+            {/* Nút trái (di chuyển slide sang trái theo vòng tròn) */}
             <button
               onClick={handlePrev}
               className="absolute left-0 text-gray-500 hover:text-gray-700 focus:outline-none z-10 px-4 py-2 text-3xl"
@@ -52,26 +55,33 @@ function SellYourMerch() {
             <div
               className="flex transition-transform duration-500 ease-in-out"
               style={{
-                transform: `translateX(${offset * (100 / imagesPerSlide)}%)`,
-                width: `${extendedImages.length * (100 / imagesPerSlide)}%`,
+                transform: `translateX(-${currentSlide * 100}%)`, // Dịch chuyển 100% mỗi slide
+                width: `${totalSlides * 100}%`, // Chiều rộng tổng cộng của tất cả slide
               }}
             >
-              {extendedImages.map((image, index) => (
-                <div key={index} className="w-1/3 flex-shrink-0 px-4">
-                  <img
-                    src={image}
-                    alt={`Product ${index + 1}`}
-                    className="w-full h-auto object-cover rounded-lg shadow-md transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl"
-                    onError={(e) => {
-                      console.error(`Image failed to load at index ${index}: ${image}`);
-                      e.target.src = 'path/to/fallback-image.jpg'; // Thay bằng đường dẫn ảnh dự phòng nếu cần
-                    }}
-                  />
+              {slides.map((slide, slideIndex) => (
+                <div
+                  key={slideIndex}
+                  className="flex w-full flex-shrink-0" // Mỗi slide chiếm 100% chiều rộng viewport
+                >
+                  {slide.map((image, index) => (
+                    <div key={index} className="w-1/3 px-4">
+                      <img
+                        src={image}
+                        alt={`Product ${slideIndex * 3 + index + 1}`}
+                        className="w-full h-auto object-cover rounded-lg shadow-md transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl"
+                        onError={(e) => {
+                          console.error(`Image failed to load at index ${slideIndex * 3 + index}: ${image}`);
+                          e.target.src = 'path/to/fallback-image.jpg'; // Thay bằng đường dẫn ảnh dự phòng nếu cần
+                        }}
+                      />
+                    </div>
+                  ))}
                 </div>
               ))}
             </div>
 
-            {/* Nút phải (di chuyển slide sang phải mãi) */}
+            {/* Nút phải (di chuyển slide sang phải theo vòng tròn) */}
             <button
               onClick={handleNext}
               className="absolute right-0 text-gray-500 hover:text-gray-700 focus:outline-none z-10 px-4 py-2 text-3xl"
