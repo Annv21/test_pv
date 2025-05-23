@@ -9,6 +9,8 @@ import ArtistPages from './components/ArtistPages';
 import EasyToUse from './components/EasyToUse';
 import SellYourMerch from './components/SellYourMerch';
 import InnerPages from './components/InnerPages';
+import Blog from './components/Blog';
+
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
       <EasyToUse />
       <SellYourMerch />
       <InnerPages />
+      <Blog />
+      
     </>
 
   );
