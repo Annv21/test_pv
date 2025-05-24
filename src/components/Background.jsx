@@ -1,7 +1,7 @@
 import React from 'react';
-import anh1 from '../assets/anh/anh1.jpg'; // Đường dẫn tương đối từ src/components/
+import anh1 from '../assets/anh/anh1.jpg'; 
 
-   function Sidebar() {
+   function Background() {
      return (
        <div className="relative h-screen flex items-center">
          <img
@@ -29,4 +29,4 @@ import anh1 from '../assets/anh/anh1.jpg'; // Đường dẫn tương đối t�
      );
    }
 
-   export default Sidebar;
+   export default Background;
