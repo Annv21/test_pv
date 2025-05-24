@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // Import images from the correct path (check if these files exist)
 import image1 from '../assets/anh/SellYourMerch/3-cols.jpg';
@@ -31,10 +31,28 @@ function SellYourMerch() {
     setCurrentSlide((prevSlide) => (prevSlide - 1 + totalSlides) % totalSlides); // Chuyển sang slide trước, quay lại cuối khi ở đầu
   };
 
+  // Tự động chạy slide
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleNext(); // Tự động gọi handleNext để chuyển slide
+    }, 3000); // Chuyển slide mỗi 3 giây (3000ms)
+
+    // Dọn dẹp interval khi component unmount hoặc khi người dùng tương tác
+    return () => clearInterval(interval);
+  }, []); // Rỗng để chỉ chạy một lần khi component mount
+
+  // Dừng tự động chạy khi người dùng nhấn nút và khởi động lại sau 3 giây
+  const handleUserInteraction = () => {
+    clearInterval(window.autoSlideInterval); // Dừng interval hiện tại
+    window.autoSlideInterval = setInterval(() => {
+      handleNext();
+    }, 3000); // Khởi động lại interval
+  };
+
   return (
     <section className="py-16 bg-gray-50 text-gray-700">
       <div className="container mx-auto px-6 text-center">
-        <h2 className="text-4xl font-bold text-gray-500 mb-2">Sell Your Merch</h2>
+        <h2 className="text-4xl font-bold text-gray-500 mb-2">Sell YourMerch</h2>
         <h3 className="text-2xl font-semibold text-gray-500 mb-6">WOOCOMMERCE SHOP</h3>
         <p className="text-gray-600 mb-12 max-w-2xl mx-auto">
           Sell your merch online using the most powerful and secure e-commerce WordPress theme: WooCommerce. Herion is built to integrates WooCommerce smoothly in its design.
@@ -45,7 +63,10 @@ function SellYourMerch() {
           <div className="flex items-center">
             {/* Nút trái (di chuyển slide sang trái theo vòng tròn) */}
             <button
-              onClick={handlePrev}
+              onClick={() => {
+                handlePrev();
+                handleUserInteraction(); // Gọi khi người dùng tương tác
+              }}
               className="absolute left-0 text-gray-500 hover:text-gray-700 focus:outline-none z-10 px-4 py-2 text-3xl"
             >
               &gt;
@@ -62,7 +83,7 @@ function SellYourMerch() {
               {slides.map((slide, slideIndex) => (
                 <div
                   key={slideIndex}
-                  className="flex w-full flex-shrink-0" // Mỗi slide chiếm 100% chiều rộng viewport
+                  className="flex w-full flex-shrink-0"
                 >
                   {slide.map((image, index) => (
                     <div key={index} className="w-1/3 px-4">
@@ -83,7 +104,10 @@ function SellYourMerch() {
 
             {/* Nút phải (di chuyển slide sang phải theo vòng tròn) */}
             <button
-              onClick={handleNext}
+              onClick={() => {
+                handleNext();
+                handleUserInteraction(); // Gọi khi người dùng tương tác
+              }}
               className="absolute right-0 text-gray-500 hover:text-gray-700 focus:outline-none z-10 px-4 py-2 text-3xl"
             >
               &gt;

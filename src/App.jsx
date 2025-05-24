@@ -10,6 +10,8 @@ import EasyToUse from './components/EasyToUse';
 import SellYourMerch from './components/SellYourMerch';
 import InnerPages from './components/InnerPages';
 import Blog from './components/Blog';
+import Review from './components/Review';
+import SaveMoney from './components/SaveMoney';
 
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
       <SellYourMerch />
       <InnerPages />
       <Blog />
+      <Review />
+      <SaveMoney />
       
     </>
 
